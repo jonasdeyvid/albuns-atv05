@@ -1,14 +1,21 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 // import { Container } from './styles';
 
-const MusicRow = ({ item }) => {
+const MusicRow = ({ item, index }) => {
   return (
-    <View>
-      <Text>{`${item.title}`}</Text>
+    <View style={styles.container}>
+      <Text>{`${index} - (${item.duration}) - ${item.title}`}</Text>
     </View>
   );
 };
 
 export default MusicRow;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    }
+})
+
