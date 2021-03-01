@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, FlatList, StyleSheet } from 'react-native';
+import { ScrollView, Text, FlatList, StyleSheet, View } from 'react-native';
 
 import MyButton from '../MyButton';
 import Card from '../card/Card';
@@ -27,22 +27,25 @@ export default class ModalScreen extends Component {
     return (
       <Card style={styles.card}>
         <CardItem style={styles.cardTitle}>
-          <Text style={{ fontSize: 30 }}>
-            {this.props.route.params.albumName}
-          </Text>
-          <Text style={{ bottom: 0 }}>Lista das Músicas </Text>
+          <View style={{alignItems: 'center'}}>
+            <Text style={{ fontSize: 20, fontWeight: "bold"}}>
+              .:: {this.props.route.params.albumName} ::.
+            </Text>
+            <Text style={{ bottom: 0 }}>Lista das Músicas </Text>
+          </View>
         </CardItem>
         <CardItem style={styles.cardTracks}>
           <FlatList
             data={this.state.tracks}
-            renderItem={(item) => (
-                <MusicList item={item}></MusicList>
-            )}
-            keyExtractor = {(index,item)=>index+item}
+            renderItem={(item) => <MusicList item={item}></MusicList>}
+            keyExtractor={(index, item) => index + item}
           />
         </CardItem>
         <CardItem style={styles.cardButton}>
-          <MyButton onPress={() => this.props.navigation.goBack()} style={styles.btn}>
+          <MyButton
+            onPress={() => this.props.navigation.goBack()}
+            style={styles.btn}
+          >
             Voltar
           </MyButton>
         </CardItem>
@@ -52,21 +55,23 @@ export default class ModalScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    card: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-    },
-    btn: {
-        bottom: 1
-    },
-    cardTitle: {
-        flex: 0,
-    },
-    cardTracks: {
-        flex: 3
-    },
-    cardButton: {
-        flex: 0
-    }
+  card: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  btn: {
+    bottom: 1,
+  },
+  cardTitle: {
+    flex: 0,
+    alignItems: "center",
+    justifyContent: 'center',
+  },
+  cardTracks: {
+    flex: 3,
+  },
+  cardButton: {
+    flex: 0,
+  },
 });
